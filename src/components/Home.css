@@ -1,0 +1,11 @@
+.Home-Page {
+    width: 100%;
+    height: 100vh;
+}
+
+.Tree-Icon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
