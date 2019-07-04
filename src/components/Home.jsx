@@ -1,15 +1,16 @@
 import React,{Component} from 'react';
 import './Home.css';
 import FallingLeaves from './FallingLeaves/FallingLeaves.jsx';
-//import Layers from './LayerCarousel/LayerCarousel.jsx';
+import Layers from './LayerCarousel/Layers.jsx';
+import SearchBar from './SearchBar/SearchBar.jsx';
 
 class Home extends Component {
     render() {
         return (
             <div className="Home-Page">
                 <FallingLeaves/>
-                <img className="Tree-Icon" src={require('../assets/tree.png')} />
-                
+                <Layers/>
+                <SearchBar placeholder="שם שכבה"/>
             </div>
         );
     }
