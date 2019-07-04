@@ -1,5 +1,9 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #6fad3d
+    background: #ffffff url('./assets/tree2.jpg') no-repeat center center fixed;
+    -webkit-backgroud-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
