@@ -20,14 +20,13 @@ class MyCarousel extends Component {
         });
     }
 
-
     render() {
         const settings = {
            slidesToShow:3,
            dots: true,
            centerMode: true,
            focusOnSelect: true,
-           swipeToSlide:true,
+           swipeToSlide:true
         };
 
         const presontorSettings = {
@@ -36,7 +35,7 @@ class MyCarousel extends Component {
             focusOnSelect:true,
             arrows:false,
             draggable: false
-        }
+        };
 
         const layers = (
             <span>

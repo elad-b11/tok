@@ -23,8 +23,8 @@ const styles = {
 const LayerCard = (props)=> {
 
     const onClick =()=> {
-        props.onClick(props.layer)
-    }
+        props.onClick(props.layer);
+    };
 
     return(
         <Card className={props.classes.card}
@@ -51,7 +51,8 @@ const LayerCard = (props)=> {
 
 LayerCard.propTypes = {
     classes: propTypes.object.isRequired,
-    layer: propTypes.object.isRequired
+    layer: propTypes.object.isRequired,
+    onClick: propTypes.func.isRequired
 };
 
 
