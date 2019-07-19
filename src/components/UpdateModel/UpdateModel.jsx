@@ -7,6 +7,10 @@ import propTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
+import Avater from '@material-ui/core/Avatar';
+import Divider from '@material-ui/core/Divider';
+import MarksTheSpot from '@material-ui/icons/Clear';
+import FieldsTab from '../modelTabs/fieldsTab/fieldsTab.jsx';
 
 const styles = {
     dialog: {
@@ -19,6 +23,15 @@ const styles = {
         background: '#eee center center',
         height: '200px',
         backgroundSize: 'cover'
+    },
+    title: {
+        display: "inline-block",
+        verticalAlign: "middle"
+    },
+    exitButton: {
+        position: 'absolute',
+        top: '0',
+        left: '0' 
     }
 };
 
@@ -36,16 +49,23 @@ const UpdateModal = (props) => {
                 fullWidth
                 maxWidth="lg"
                 TransitionComponent={Transition}>
-                <div className={props.classes.logo} style={{backgroundImage:`url(${props.layer.logo}`}}/>
-                <DialogTitle>
-                    {props.layer.name}
+                <DialogTitle className={props.classes.title}>
+                    <div className={props.classes.title}>
+                        <div className={props.classes.title}>{props.layer.name}</div>
+                        <Avater className={props.classes.title} 
+                                alt={props.layer.name} 
+                                src={props.layer.logo} 
+                                style={{width:"100px", height:"100px"}} />
+                    </div>
+                    <Button className={props.classes.exitButton} onClick={props.onClose}><MarksTheSpot/></Button>
                 </DialogTitle>
+                <Divider/>
                 <DialogContent>
-                    <h3>To be continued</h3>
+                    <FieldsTab/>
                 </DialogContent>
+                <Divider/>
                 <DialogActions>
                     <Button>עדכן</Button>
-                    <Button onClick={props.onClose}>בטל</Button>
                 </DialogActions>
         </Dialog>
     );
