@@ -6,7 +6,8 @@ export default {
     devtool: 'cheap-module-eval-source-map',
     noInfo: false,
     entry: [
-        'webpack-hot-middleware/client?reload=true', 
+        'webpack-hot-middleware/client?reload=true',
+        'babel-polyfill', 
         './src/app.jsx'
     ],
     target: 'web',
