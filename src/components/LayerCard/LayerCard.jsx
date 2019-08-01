@@ -33,8 +33,7 @@ const LayerCard = (props)=> {
                 <CardMedia
                     className={props.classes.media}
                     image={props.layer.logo}
-                    title={props.layer.name}
-                />
+                    title={props.layer.name}/>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2" className={props.classes.content}>
                         {props.layer.name}
