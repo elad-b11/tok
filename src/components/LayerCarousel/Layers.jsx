@@ -1,45 +1,12 @@
 import Coverflow from 'react-coverflow';
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import propTypes from 'prop-types';
+
+import layerActions from '../../actions/layersActions.js';
 import LayerCard from '../LayerCard/LayerCard.jsx';
 import UpdateModel from '../UpdateModel/UpdateModel.jsx';
-
-const layers = [
-    {
-        _id: "aaa",
-        name:"שכבה יפה",
-        description: "Bla bla bla",
-        creationTime: new Date().toDateString(),
-        logo: require("../../assets/tree.png")
-    },
-    {
-        _id: "bbb",
-        name:"וואו",
-        description: "Bla bla bla",
-        creationTime: new Date().toDateString(),
-        logo: require("../../assets/tree.png")
-    },
-    {
-        _id: "ccc",
-        name:"איזה יופי",
-        description: "Bla bla bla",
-        creationTime: new Date().toDateString(),
-        logo: require("../../assets/tree.png")
-    },
-    {
-        _id: "ddd",
-        name:"Layer",
-        description: "Bla bla bla",
-        creationTime: new Date().toDateString(),
-        logo: require("../../assets/tree.png")
-    },
-    {
-        _id: "eee",
-        name:"שכבה מקורית",
-        description: "Bla bla bla",
-        creationTime: new Date().toDateString(),
-        logo: require("../../assets/tree.png")
-    }
-];
 
 const settings = {
     width: 960,
@@ -64,6 +31,7 @@ class Layers extends Component {
     }
 
     onLayerClicked(layer) {
+        this.props.layerActions.getLayerById(layer._id);
         this.setState({isOpen:true, currLayer:layer});
     }
 
@@ -72,6 +40,8 @@ class Layers extends Component {
     }
 
     render() {
+        const layers = this.props.layers;
+
         return (
             <div>
                 <Coverflow className="layersContainer" {...settings} active={this.state.active}>
@@ -79,7 +49,7 @@ class Layers extends Component {
                 </Coverflow>
                 {
                     this.state.isOpen?
-                        <UpdateModel isOpen={this.state.isOpen} layer={this.state.currLayer} onClose={this.onCloseModel}/>:
+                        <UpdateModel isOpen={this.state.isOpen} miniLayer={this.state.currLayer} onClose={this.onCloseModel}/>:
                         <span/>
                 }
             </div>
@@ -89,4 +59,21 @@ class Layers extends Component {
 
 }
 
-export default Layers;
+Layers.propTypes = {
+    layers: propTypes.array,
+    layerActions: propTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => {
+    return {
+        layers: state.layers.list
+    };
+};
+
+const mapDipatchToProps = (dispatch) => {
+    return {
+        layerActions : bindActionCreators(layerActions, dispatch)
+    };
+};
+
+export default connect(mapStateToProps, mapDipatchToProps)(Layers);

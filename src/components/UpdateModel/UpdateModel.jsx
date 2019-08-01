@@ -10,7 +10,12 @@ import Slide from '@material-ui/core/Slide';
 import Avater from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import MarksTheSpot from '@material-ui/icons/Clear';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
 import FieldsTab from '../modelTabs/fieldsTab/fieldsTab.jsx';
+import layersActions from '../../actions/layersActions.js';
+import Loader from '../common/Loader.jsx';
 
 const styles = {
     dialog: {
@@ -26,7 +31,8 @@ const styles = {
     },
     title: {
         display: "inline-block",
-        verticalAlign: "middle"
+        verticalAlign: "middle",
+        padding: 0
     },
     exitButton: {
         position: 'absolute',
@@ -39,43 +45,63 @@ const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props}/>;
 });
 
-const UpdateModal = (props) => {
+class UpdateModal extends Component{
+    constructor(props) {
+        super(props);
+    }
 
-    return (
-        <Dialog open={props.isOpen}
-                onClose={props.onClose}
-                aria-labelledby="form-dialog-title"
-                className={props.classes.dialog}
-                fullWidth
-                maxWidth="lg"
-                TransitionComponent={Transition}>
-                <DialogTitle className={props.classes.title}>
-                    <div className={props.classes.title}>
-                        <div className={props.classes.title}>{props.layer.name}</div>
-                        <Avater className={props.classes.title} 
-                                alt={props.layer.name} 
-                                src={props.layer.logo} 
-                                style={{width:"100px", height:"100px"}} />
-                    </div>
-                    <Button className={props.classes.exitButton} onClick={props.onClose}><MarksTheSpot/></Button>
-                </DialogTitle>
-                <Divider/>
-                <DialogContent>
-                    <FieldsTab/>
-                </DialogContent>
-                <Divider/>
-                <DialogActions>
-                    <Button>עדכן</Button>
-                </DialogActions>
-        </Dialog>
-    );
-};
+    render() {
+        const props = this.props;
+
+        return (
+            <Dialog open={props.isOpen}
+                    onClose={props.onClose}
+                    aria-labelledby="form-dialog-title"
+                    className={props.classes.dialog}
+                    fullWidth
+                    maxWidth="lg">
+                    <DialogTitle className={props.classes.title}>
+                        <div className={props.classes.title}>
+                            <div className={props.classes.title}>{props.miniLayer.name}</div>
+                            <Avater className={props.classes.title} 
+                                    alt={props.miniLayer.name} 
+                                    src={props.miniLayer.logo} 
+                                    style={{width:"100px", height:"100px"}} />
+                        </div>
+                        <Button className={props.classes.exitButton} onClick={props.onClose}><MarksTheSpot/></Button>
+                    </DialogTitle>
+                    <Divider/>
+                    <DialogContent style={{padding: 0}}>
+                        {props.isLoading?<Loader/>:<FieldsTab layer={props.layer}/>}
+                    </DialogContent>
+                    <Divider/>
+                    <DialogActions>
+                        <Button>עדכן</Button>
+                    </DialogActions>
+            </Dialog>
+        );
+    }
+}
 
 UpdateModal.propTypes = {
-    layer: propTypes.object.isRequired,
+    layer: propTypes.object,
     isOpen: propTypes.bool.isRequired,
     onClose: propTypes.func.isRequired,
-    classes: propTypes.object.isRequired
+    classes: propTypes.object.isRequired,
+    miniLayer: propTypes.object.isRequired
 };
 
-export default withStyles(styles)(UpdateModal);
+const mapStateToProps = (state) => {
+    return {
+        layer: state.layers.currLayer,
+        isLoading: state.layers.isLoading
+    };
+};
+
+const mapDipatchToProps = (dispatch) => {
+    return {
+        layerActions: bindActionCreators(layersActions, dispatch)
+    };
+};
+
+export default connect(mapStateToProps, mapDipatchToProps)(withStyles(styles)(UpdateModal));
