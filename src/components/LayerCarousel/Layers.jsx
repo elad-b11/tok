@@ -1,4 +1,4 @@
-import Coverflow from 'react-coverflow';
+import Coverflow from 'react-coverflow'; // Maybe will change to React-responsice-carousel due to this librery being to laggy
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -36,6 +36,7 @@ class Layers extends Component {
     }
 
     onCloseModel() {
+        this.props.layerActions.cancelLayerOparation();
         this.setState({isOpen:false, currLayer:null});
     }
 

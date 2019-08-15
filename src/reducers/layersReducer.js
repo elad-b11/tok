@@ -15,6 +15,8 @@ export default (state=initialState.layers, action) => {
             return Object.assign({}, state, {isLoading: false, currLayer: action.layer}); 
         case types.getLayerByIdError: 
             return Object.assign({}, state, {isLoading: false, errMsg: action.errMsg}); 
+        case types.operationCancel:
+            return Object.assign({}, state, {isLoading: false, currLayer: null});
         default: 
             return state;
     }

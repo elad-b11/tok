@@ -23,5 +23,8 @@ export default {
                 dispatch({type: types.getLayerByIdError, errMsg:ex});
             }  
         }
+    },
+    cancelLayerOparation() {
+        return {type: types.operationCancel};
     }
 }
