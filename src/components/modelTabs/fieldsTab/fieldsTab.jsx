@@ -3,15 +3,12 @@ import {EditingState} from '@devexpress/dx-react-grid';
 import {Grid, Table, TableHeaderRow, TableEditRow, TableEditColumn} from '@devexpress/dx-react-grid-material-ui';
 import Paper from '@material-ui/core/Paper';
 import ListProvider from './columnTypeProviders/listProvider.jsx';
+import config from '../../../configs/config.js';
 
-const cellStyle = {
-    direction: 'rtl',
-    textAlign: 'right'
-};
-
+const avialibleDataTypes = config.avialibleDataTypes;
 const columns = [
     {title: 'ערך דיפולטי', name: 'defualtValue'},
-    {title: 'סוג', name: 'type', lookup:{"text":"טקסט", "number":"מספר"}, filtering: true},
+    {title: 'סוג', name: 'type', options: avialibleDataTypes, filtering: true},
     {title: 'תיאור', name: 'description'},
     {title: 'שם', name: 'name', sorting: true},
     {title: 'לא עריך', name: 'nonEditable', type:'boolean'},
@@ -19,19 +16,6 @@ const columns = [
 ];
 const rows = [{key:1, name:"abc", required:true, nonEditable: false, description: "asd", type:"text"}];
 
-const avialibleDataTypes = [
-    {name: 'טקסט', value:'text'},
-    {name: 'מספר', value:'number'},
-    {name: 'תאריך ושעה', value:'dateTime'},
-    {name: 'גיאוגרפיה', value:'geography'},
-    {name: 'בחירה מתוך רשימה', value:'itemFromList'},
-    {name: 'בחירה מתוך עץ', value:'itemFromTree'},
-    {name: 'קובץ', value:'file'},
-    {name: 'רשימת טקסטים', value:'textList'},
-    {name: 'רשימת קבצים', value:'fileList'},
-    {name: 'תאריך עם אזור זמן', value:'timeZone'},
-    {name: 'קישור', value:'link'}
-];
 
 class FieldsTab extends Component {
 
@@ -80,7 +64,7 @@ class FieldsTab extends Component {
                     rows={rows}
                     columns={columns}
                     getRowId={(row) => row.id}>
-                    <ListProvider for={['type']} itemList={avialibleDataTypes}/>
+                    <ListProvider for={['type']}/>
                     <EditingState onCommitChanges={this.onCommitChanges}/>
                     <Table/>
                     <TableHeaderRow/>

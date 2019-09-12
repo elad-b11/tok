@@ -6,7 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
 
 const listTypeEditor = (props) => {
-    let {value, onValueChange, itemList} = props;
+    let {value, onValueChange, column} = props;
+    let itemList = column.options || [];
     
     return (
         <Select 
@@ -26,14 +27,14 @@ const listTypeEditor = (props) => {
 
 const ListProvider = (props) => {
     return <DataTypeProvider 
-                editorComponent={(editProps) => <listTypeEditor {...editProps} itemList={props.itemList}/>} 
+                editorComponent={listTypeEditor} 
                 {...props}/>;
 };
 
 listTypeEditor.propTypes = {
     value: propTypes.string,
     onValueChange: propTypes.func.isRequired,
-    itemList: propTypes.array.isRequired
+    column:propTypes.object.isRequired
 };
 
 export default ListProvider;

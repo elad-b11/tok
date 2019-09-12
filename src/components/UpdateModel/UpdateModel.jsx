@@ -12,7 +12,6 @@ import Divider from '@material-ui/core/Divider';
 import MarksTheSpot from '@material-ui/icons/Clear';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-
 import FieldsTab from '../modelTabs/fieldsTab/fieldsTab.jsx';
 import layersActions from '../../actions/layersActions.js';
 import Loader from '../common/Loader.jsx';
