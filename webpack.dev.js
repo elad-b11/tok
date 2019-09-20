@@ -1,16 +1,24 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
+    mode: 'development',
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 3000,
+        open: true,
+        hot: true
+    },
     devtool: "eval-source-map",
-    target: "web",
     entry: [
         "@babel/polyfill",
         "./src/app.jsx"
     ],
     output: {
-        path: __dirname + "/dist",
+        path: path.join(__dirname, "/dist"),
         publicPath: "/",
         filename: "bundle.js"
     },
@@ -53,7 +61,7 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebPackPlugin({
-            template: __dirname + "/src/index.html",
+            template: path.join(__dirname, "/src/index.html"),
             filename: "./index.html"
         }),
         new MiniCssExtractPlugin({

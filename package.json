@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run server",
-    "build": "webpack --mode development",
-    "server": "webpack-dev-server --watch --open --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack --mode production"
   },
   "author": "Elad barmack",
   "license": "ISC",
