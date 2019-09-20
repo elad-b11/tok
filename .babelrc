@@ -1,9 +1,8 @@
 {
-    "presets": ["react", "es2015", "stage-0"],
-    "env": {
-      "development": {
-        "presets": ["react-hmre"]
-      }
-    },
-    "plugins": ["transform-async-to-generator", "syntax-dynamic-import", "react-hot-loader/babel"]
+    "presets": ["@babel/preset-react", "@babel/preset-env"],
+    "plugins": ["@babel/plugin-transform-async-to-generator", 
+                "@babel/plugin-syntax-dynamic-import", 
+                "react-hot-loader/babel",
+                "@babel/plugin-transform-arrow-functions",
+                "@babel/plugin-proposal-class-properties"]
   }
