@@ -74,6 +74,10 @@ const sleep = (ms = 2000) => {
     });
 };
 
+const getLayersBySubName = (substringName) => {
+    return layers.filter(layer => layer.name.includes(substringName));
+};
+
 export default {
     getLayersTree: async () => {
         await sleep();
@@ -83,6 +87,11 @@ export default {
     getLayerById: async (id) => {
         await sleep();
 
-        return getFullLayer(id)
+        return getFullLayer(id);
+    },
+    getLayersSuggestions: async (substringName) => {
+        await sleep(200);
+
+        return getLayersBySubName(substringName);
     }
 }

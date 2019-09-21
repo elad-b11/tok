@@ -1,44 +1,49 @@
-import TextField from '@material-ui/core/TextField';
-import React, { Component } from 'react';
-import propTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from "react";
+import { Search } from "semantic-ui-react";
+import { debounce } from "lodash";
+import LayersAPI from "../../api/layersApi.js";
 
-const styles = {
-    searchBar:{
-        backgroundColor: "white",
-        direction: "rtl"
-    },
-    continer: {
-        width: "50%",
-        padding: "0 25%"
-    }
-};
+class SearchBar extends Component {
+  constructor() {
+    super();
 
-const SearchBar = (props) => {
-    return(
-        <div className={props.classes.continer}>
-            <TextField
-                className={props.classes.searchBar}
-                id="filled-full-width"
-                label=""
-                placeholder={props.placeholder}
-                helperText=""
-                fullWidth
-                margin="normal"
-                variant="filled"
-                InputLabelProps={{
-                    shrink: true
-                }}                
-                onChange={props.onSearch}
-            />
-        </div>
+    this.state = {
+      isLoading: false,
+      results: [],
+      value: ""
+    };
+  }
+
+  handleResultSelect = (e, { result }) => this.setState({ value: result.name });
+
+  handleSearchChange = async (e, { value }) => {
+    if (value.length < 1) return;
+
+    this.setState({ isLoading: true, value });
+
+    const suggestedLayers = await LayersAPI.getLayersSuggestions(value);
+
+    this.setState({
+      isLoading: false,
+      results: suggestedLayers.map(layer => layer.name)
+    });
+  };
+
+  render() {
+    const { isLoading, value, results } = this.state;
+
+    return (
+      <Search
+        loading={isLoading}
+        onResultSelect={this.handleResultSelect}
+        onSearchChange={debounce(this.handleSearchChange, 500, {
+          leading: true
+        })}
+        results={results}
+        value={value}
+      />
     );
-};
+  }
+}
 
-SearchBar.propTypes = {
-    onSearch: propTypes.func,
-    placeholder: propTypes.string,
-    classes: propTypes.object.isRequired
-};
-
-export default withStyles(styles)(SearchBar);
+export default SearchBar;
