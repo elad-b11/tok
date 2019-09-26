@@ -25,9 +25,19 @@ const listTypeEditor = (props) => {
     );
 };
 
+const listTypeFormatter = (props) => {
+    let {value, column} = props;
+    let itemList = column.options || [];
+    let type =  itemList.find((elem) => elem.value===value);
+    let displayName = type.name || value;
+
+    return <span>{displayName}</span>
+}
+
 const ListProvider = (props) => {
     return <DataTypeProvider 
                 editorComponent={listTypeEditor} 
+                formatterComponent={listTypeFormatter}
                 {...props}/>;
 };
 
