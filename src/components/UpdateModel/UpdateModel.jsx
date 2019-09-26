@@ -16,6 +16,8 @@ import FieldsTab from '../modelTabs/fieldsTab/fieldsTab.jsx';
 import layersActions from '../../actions/layersActions.js';
 import Loader from '../common/Loader.jsx';
 
+import "./UpdateModel.scss";
+
 const styles = {
     dialog: {
         textAlign: "right"
@@ -58,7 +60,12 @@ class UpdateModal extends Component{
                     aria-labelledby="form-dialog-title"
                     className={props.classes.dialog}
                     fullWidth
-                    maxWidth="lg">
+                    maxWidth="lg"
+                    classes={
+                        {
+                            paper:"dialog-paper"
+                        }
+                    }>
                     <DialogTitle className={props.classes.title}>
                         <div className={props.classes.title}>
                             <div className={props.classes.title}>{props.miniLayer.name}</div>
