@@ -59,14 +59,14 @@ const fields = {
         readOnly: false,
         isNotEditable: false
     }        
-}
+};
 
 const getFullLayer = (id) => {
     let layer = Object.assign({}, layers.find((layer) => layer._id === id));
     layer.fields = JSON.parse(JSON.stringify(fields));
 
     return layer;
-}
+};
 
 const sleep = (ms = 2000) => {
     return new Promise((resolve)=>{
@@ -94,4 +94,4 @@ export default {
 
         return getLayersBySubName(substringName);
     }
-}
+};

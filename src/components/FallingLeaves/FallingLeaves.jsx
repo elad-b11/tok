@@ -7,7 +7,7 @@ class FallingLeaves extends Component {
                 <div className="Falling-Leaves">
                     {[...Array(20).keys()].map((index)=>{
                         return(
-                            <span key={"leaf-"+index}></span>
+                            <span key={"leaf-"+index}/>
                         );
                         })}
                 </div>

@@ -11,7 +11,7 @@ export default {
             } catch(ex) {
                 dispatch({type: types.getLayersTreeError, errMsg:ex});
             }  
-        }
+        };
     },
     getLayerById(id) {
         return async (dispatch) => {
@@ -22,9 +22,9 @@ export default {
             } catch(ex) {
                 dispatch({type: types.getLayerByIdError, errMsg:ex});
             }  
-        }
+        };
     },
     cancelLayerOparation() {
         return {type: types.operationCancel};
     }
-}
+};

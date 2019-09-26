@@ -87,7 +87,8 @@ UpdateModal.propTypes = {
     isOpen: propTypes.bool.isRequired,
     onClose: propTypes.func.isRequired,
     classes: propTypes.object.isRequired,
-    miniLayer: propTypes.object.isRequired
+    miniLayer: propTypes.object.isRequired,
+    isLoading: propTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {
