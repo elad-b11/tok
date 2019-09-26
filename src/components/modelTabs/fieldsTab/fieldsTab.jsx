@@ -68,7 +68,11 @@ class FieldsTab extends Component {
                     <Table/>
                     <TableHeaderRow/>
                     <TableEditRow/>
-                    <TableEditColumn showAddCommand showDeleteCommand showEditCommand />
+                    <TableEditColumn 
+                        showAddCommand 
+                        showDeleteCommand 
+                        showEditCommand 
+                        commandComponent={TableCommands}/>
                 </Grid>
             </Paper>
         );
