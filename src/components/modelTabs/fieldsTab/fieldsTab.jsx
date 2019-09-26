@@ -1,27 +1,26 @@
-import React, {Component, forwardRef} from 'react';
+import React, {Component} from 'react';
 import {EditingState} from '@devexpress/dx-react-grid';
 import {Grid, Table, TableHeaderRow, TableEditRow, TableEditColumn} from '@devexpress/dx-react-grid-material-ui';
 import Paper from '@material-ui/core/Paper';
 import ListProvider from './columnTypeProviders/listProvider.jsx';
 import config from '../../../configs/config.js';
+import TableCommands from './TableCommands.jsx';
 
 const avialibleDataTypes = config.avialibleDataTypes;
-const columns = [
-    {title: 'ערך דיפולטי', name: 'defualtValue'},
-    {title: 'סוג', name: 'type', options: avialibleDataTypes, filtering: true},
-    {title: 'תיאור', name: 'description'},
-    {title: 'שם', name: 'name', sorting: true},
-    {title: 'לא עריך', name: 'nonEditable', type:'boolean'},
-    {title: 'חובה', name: 'required', type:'boolean'}
-];
-const rows = [{key:1, name:"abc", required:true, nonEditable: false, description: "asd", type:"text"}];
-
 
 class FieldsTab extends Component {
 
     constructor(props) {
         super(props);
-
+        const rows = [{key:1, name:"abc", required:"true", nonEditable: "false", description: "asd", type:"text"}];
+        const columns = [
+            {title: 'ערך דיפולטי', name: 'defualtValue'},
+            {title: 'סוג', name: 'type', options: avialibleDataTypes},
+            {title: 'תיאור', name: 'description'},
+            {title: 'שם', name: 'name'},
+            {title: 'לא עריך', name: 'nonEditable', type:'boolean'},
+            {title: 'חובה', name: 'required', type:'boolean'}
+        ]
         this.state = {
             columns,
             rows
