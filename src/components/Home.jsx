@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
 
-import "./Home.css";
+import './Home.scss';
 import FallingLeaves from "./FallingLeaves/FallingLeaves.jsx";
 import Layers from "./LayerCarousel/Layers.jsx";
 import SearchBar from "./SearchBar/SearchBar.jsx";
