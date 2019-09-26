@@ -31,6 +31,7 @@ class FieldsTab extends Component {
 
     onCommitChanges({added, changed, deleted}) {
         let changedRows;
+        const rows = this.state.rows;
 
         if(added) {
             let startingKey = rows.length > 0 ? rows[rows.length -1].key + 1: 0;
@@ -54,15 +55,14 @@ class FieldsTab extends Component {
         this.setState({rows: changedRows});
     }
     
-    
     render() {
         
         return (
             <Paper>
                 <Grid
-                    rows={rows}
-                    columns={columns}
-                    getRowId={(row) => row.id}>
+                    rows={this.state.rows}
+                    columns={this.state.columns}
+                    getRowId={(row) => row.key}>
                     <ListProvider for={['type']}/>
                     <EditingState onCommitChanges={this.onCommitChanges}/>
                     <Table/>
