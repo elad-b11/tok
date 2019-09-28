@@ -1,0 +1,20 @@
+.search-bar {
+    direction: rtl;
+    width: 50%;
+    margin: 0 auto;
+    min-width: 400px;
+}
+
+.ui.icon.input > input {
+    text-align: right;
+}
+
+.ui.search > .results {
+    position: relative;
+    align-items: center;
+    text-align: right;
+}
+
+.horizontal-line > div {
+    display: inline-block;
+}

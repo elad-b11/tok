@@ -9,7 +9,7 @@ module.exports = {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: 3000,
-        open: true,
+        open: false,
         hot: true
     },
     devtool: "eval-source-map",
@@ -34,7 +34,7 @@ module.exports = {
                 use: [{ loader: "html-loader", options: { minimize: true } }]
             },
             {
-                test: /\.(png|jpe?g|gif)/i,
+                test: /\.(png|woff|woff2|eot|ttf|svg|jpe?g|gif)/i,
                 use: [
                     {
                         loader: "url-loader",
@@ -49,7 +49,11 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(sass|scss|css)$/,
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(sass|scss)$/,
                 use: [
                     "style-loader",
                     "css-loader",

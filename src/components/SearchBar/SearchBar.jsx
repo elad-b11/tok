@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { Search } from "semantic-ui-react";
+import { Search, Label, Segment } from "semantic-ui-react";
 import { debounce } from "lodash";
 import LayersAPI from "../../api/layersApi.js";
+
+import "semantic-ui-css/semantic.min.css";
+import "./SearchBar.scss";
 
 class SearchBar extends Component {
   constructor() {
@@ -10,37 +13,75 @@ class SearchBar extends Component {
     this.state = {
       isLoading: false,
       results: [],
-      value: ""
+      layerName: "",
+      layerId: ""
     };
   }
 
-  handleResultSelect = (e, { result }) => this.setState({ value: result.name });
+  handleResultSelect = (e, { result }) => {
+    this.setState({ layerName: result.title, layerId: result.layerId });
+  };
 
   handleSearchChange = async (e, { value }) => {
-    if (value.length < 1) return;
+    const trimedValue = value.trim();
 
-    this.setState({ isLoading: true, value });
+    if (trimedValue.length < 1) {
+      this.setState({ layerName: value, results: [] });
+      return;
+    }
 
-    const suggestedLayers = await LayersAPI.getLayersSuggestions(value);
+    this.setState({ isLoading: true, layerName: value, results: [] });
+
+    const suggestedLayers = await LayersAPI.getLayersSuggestions(trimedValue);
 
     this.setState({
       isLoading: false,
-      results: suggestedLayers.map(layer => layer.name)
+      results: suggestedLayers.map(layer =>
+        Object.assign(
+          {},
+          {
+            title: layer.name,
+            creationtime: layer.creationTime,
+            description: layer.description,
+            image: layer.logo
+          }
+        )
+      )
     });
   };
 
+  resultRenderer = layer => {
+    return (
+      <div className="horizontal-line">
+        <div className="content">
+          <div className="title">{layer.title}</div>
+          <div className="description">{layer.description}</div>
+        </div>
+        <div className="image">
+          <img src={layer.image} />
+        </div>
+      </div>
+    );
+  };
+
   render() {
-    const { isLoading, value, results } = this.state;
+    const { isLoading, layerName, results } = this.state;
 
     return (
       <Search
+        className="search-bar"
+        input={{ fluid: true }}
+        fluid
+        value={layerName}
         loading={isLoading}
+        icon={"search"}
         onResultSelect={this.handleResultSelect}
         onSearchChange={debounce(this.handleSearchChange, 500, {
           leading: true
         })}
+        resultRenderer={this.resultRenderer}
+        noResultsMessage={"אין תוצאות"}
         results={results}
-        value={value}
       />
     );
   }
