@@ -9,8 +9,8 @@ const strToBool = {
 }
 
 const checkTypeEditor = (props) => {
-    let {value, onValueChange, column} = props;
-    let boolValue = strToBool["true"];
+    let {value, onValueChange} = props;
+    let boolValue = strToBool[value];
 
     return (
         <Checkbox checked={boolValue} onChange={(event)=> onValueChange(event.target.checked.toString())}/>
@@ -18,7 +18,7 @@ const checkTypeEditor = (props) => {
 };
 
 const checkTypeFormatter = (props) => {
-    let {value, column} = props;
+    let {value} = props;
     let boolValue = value === "true"? true:false;
 
     return (

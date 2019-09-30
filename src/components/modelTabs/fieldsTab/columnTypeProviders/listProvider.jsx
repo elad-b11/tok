@@ -9,16 +9,20 @@ const listTypeEditor = (props) => {
     let {value, onValueChange, column} = props;
     let itemList = column.options || [];
 
+    if(!value) {
+        value = itemList[0].value;
+        onValueChange(value);
+    }
+
     return (
         <Select 
             value={value}
-            
             input={<Input/>}
             onChange={event => onValueChange(event.target.value)}
             style={{width:'100%'}}>
             {
-                itemList.map((dataType, index) => 
-                    <MenuItem key={index} value={dataType.value}>{dataType.name}</MenuItem>
+                itemList.map((item, index) => 
+                    <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
                 )
             }
         </Select>
