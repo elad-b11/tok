@@ -8,14 +8,14 @@ import Input from '@material-ui/core/Input';
 const listTypeEditor = (props) => {
     let {value, onValueChange, column} = props;
     let itemList = column.options || [];
-    
+
     return (
         <Select 
             value={value}
+            
             input={<Input/>}
             onChange={event => onValueChange(event.target.value)}
-            style={{width:'100%'}}
-        >
+            style={{width:'100%'}}>
             {
                 itemList.map((dataType, index) => 
                     <MenuItem key={index} value={dataType.value}>{dataType.name}</MenuItem>
@@ -31,8 +31,8 @@ const listTypeFormatter = (props) => {
     let type =  itemList.find((elem) => elem.value===value);
     let displayName = type.name || value;
 
-    return <span>{displayName}</span>
-}
+    return (<span>{displayName}</span>);
+};
 
 const ListProvider = (props) => {
     return <DataTypeProvider 
@@ -44,6 +44,11 @@ const ListProvider = (props) => {
 listTypeEditor.propTypes = {
     value: propTypes.string,
     onValueChange: propTypes.func.isRequired,
+    column:propTypes.object.isRequired
+};
+
+listTypeFormatter.propTypes = {
+    value: propTypes.string,
     column:propTypes.object.isRequired
 };
 

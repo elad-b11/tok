@@ -3,6 +3,7 @@ import {EditingState} from '@devexpress/dx-react-grid';
 import {Grid, Table, TableHeaderRow, TableEditRow, TableEditColumn} from '@devexpress/dx-react-grid-material-ui';
 import Paper from '@material-ui/core/Paper';
 import ListProvider from './columnTypeProviders/listProvider.jsx';
+import CheckProvider from './columnTypeProviders/checkProvider.jsx';
 import config from '../../../configs/config.js';
 import TableCommands from './TableCommands.jsx';
 
@@ -12,7 +13,7 @@ class FieldsTab extends Component {
 
     constructor(props) {
         super(props);
-        const rows = [{key:1, name:"abc", required:"true", nonEditable: "false", description: "asd", type:"text"}];
+        const rows = [{key:1, name:"abc", required: "true", nonEditable: "false", description: "asd", type:"text"}];
         const columns = [
             {title: 'ערך דיפולטי', name: 'defualtValue'},
             {title: 'סוג', name: 'type', options: avialibleDataTypes},
@@ -20,7 +21,8 @@ class FieldsTab extends Component {
             {title: 'שם', name: 'name'},
             {title: 'לא עריך', name: 'nonEditable', type:'boolean'},
             {title: 'חובה', name: 'required', type:'boolean'}
-        ]
+        ];
+        
         this.state = {
             columns,
             rows
@@ -64,6 +66,7 @@ class FieldsTab extends Component {
                     columns={this.state.columns}
                     getRowId={(row) => row.key}>
                     <ListProvider for={['type']}/>
+                    <CheckProvider for={['nonEditable', 'required']}/>
                     <EditingState onCommitChanges={this.onCommitChanges}/>
                     <Table/>
                     <TableHeaderRow/>
