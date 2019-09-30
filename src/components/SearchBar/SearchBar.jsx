@@ -72,6 +72,7 @@ class SearchBar extends Component {
         className="search-bar"
         input={{ fluid: true }}
         fluid
+        autoFocus
         value={layerName}
         loading={isLoading}
         icon={"search"}
