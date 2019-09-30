@@ -46,12 +46,12 @@ class FieldsTab extends Component {
         }
 
         if(changed) {
-            changedRows = rows.map((row)=> changed[row.id] ? {...row, ...changed[row.id]}: row);
+            changedRows = rows.map((row)=> changed[row.key] ? {...row, ...changed[row.key]}: row);
         }
 
         if(deleted) {
             const deletedSet = new Set(deleted);
-            changedRows = rows.filter(row => !deletedSet.has(row.id));
+            changedRows = rows.filter(row => !deletedSet.has(row.key));
         }
 
         this.setState({rows: changedRows});
