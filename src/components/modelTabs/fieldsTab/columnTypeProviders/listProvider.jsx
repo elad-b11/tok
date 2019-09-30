@@ -9,8 +9,8 @@ const listTypeEditor = (props) => {
     let {value, onValueChange, column} = props;
     let itemList = column.options || [];
 
-    if(!value) {
-        value = itemList[0].value;
+    if(!value && column.initialValue) {
+        value = column.initialValue;
         onValueChange(value);
     }
 
@@ -33,7 +33,7 @@ const listTypeFormatter = (props) => {
     let {value, column} = props;
     let itemList = column.options || [];
     let type =  itemList.find((elem) => elem.value===value);
-    let displayName = type.name || value;
+    let displayName = type ? type.name : "";
 
     return (<span>{displayName}</span>);
 };

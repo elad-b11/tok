@@ -6,6 +6,7 @@ import ListProvider from './columnTypeProviders/listProvider.jsx';
 import CheckProvider from './columnTypeProviders/checkProvider.jsx';
 import config from '../../../configs/config.js';
 import TableCommands from './TableCommands.jsx';
+import propTypes from 'prop-types';
 
 const avialibleDataTypes = config.avialibleDataTypes;
 
@@ -13,22 +14,35 @@ class FieldsTab extends Component {
 
     constructor(props) {
         super(props);
-        const rows = [{key:1, name:"abc", required: "true", nonEditable: "false", description: "asd", type:"text"}];
         const columns = [
             {title: 'ערך דיפולטי', name: 'defualtValue'},
-            {title: 'סוג', name: 'type', options: avialibleDataTypes},
+            {title: 'סוג', name: 'type', options: avialibleDataTypes, initialValue: avialibleDataTypes[0]},
             {title: 'תיאור', name: 'description'},
-            {title: 'שם', name: 'name'},
-            {title: 'לא עריך', name: 'nonEditable', type:'boolean'},
-            {title: 'חובה', name: 'required', type:'boolean'}
+            {title: 'שם', name: 'displayName'},
+            {title: 'לא עריך', name: 'isNotEditable', type:'boolean'},
+            {title: 'חובה', name: 'isRequired', type:'boolean'}
         ];
         
         this.state = {
             columns,
-            rows
+            rows:[]
         };
 
         this.onCommitChanges = this.onCommitChanges.bind(this);
+    }
+    
+    componentWillMount() {
+        let layerFields = this.props.layer.fields;
+        let rows = Object.keys(layerFields).map((fieldKey) => {
+            let layerField = layerFields[fieldKey];
+            layerField.type = layerField.inputType.type;
+            layerField.isRequired = layerField.isRequired.toString();
+            layerField.isNotEditable = layerField.isNotEditable.toString();
+
+            return layerField;
+        });
+
+        this.setState({rows});
     }
 
     onCommitChanges({added, changed, deleted}) {
@@ -66,7 +80,7 @@ class FieldsTab extends Component {
                     columns={this.state.columns}
                     getRowId={(row) => row.key}>
                     <ListProvider for={['type']}/>
-                    <CheckProvider for={['nonEditable', 'required']}/>
+                    <CheckProvider for={['isNotEditable', 'isRequired']}/>
                     <EditingState onCommitChanges={this.onCommitChanges}/>
                     <Table/>
                     <TableHeaderRow/>
@@ -81,5 +95,9 @@ class FieldsTab extends Component {
         );
     }
 }
+
+FieldsTab.propTypes = {
+    layer: propTypes.object.isRequired
+};
 
 export default FieldsTab;
