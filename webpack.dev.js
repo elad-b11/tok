@@ -10,7 +10,8 @@ module.exports = {
         compress: true,
         port: 3000,
         open: false,
-        hot: true
+        hot: true,
+        historyApiFallback: true
     },
     devtool: "eval-source-map",
     entry: [
@@ -66,7 +67,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebPackPlugin({
             template: path.join(__dirname, "/src/index.html"),
-            filename: "./index.html"
+            filename: "./index.html",
         }),
         new MiniCssExtractPlugin({
             filename: "[name].css",

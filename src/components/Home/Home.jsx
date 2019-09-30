@@ -3,12 +3,12 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
 
-import "./Home.css";
-import FallingLeaves from "./FallingLeaves/FallingLeaves.jsx";
-import Layers from "./LayerCarousel/Layers.jsx";
-import SearchBar from "./SearchBar/SearchBar.jsx";
-import layerActions from "../actions/layersActions.js";
+import FallingLeaves from "../FallingLeaves/FallingLeaves.jsx";
+import Layers from "../LayerCarousel/Layers.jsx";
+import SearchBar from "../SearchBar/SearchBar.jsx";
+import layerActions from "../../actions/layersActions.js";
 import { Grid } from "semantic-ui-react";
+import "./Home.css";
 
 class Home extends Component {
   constructor(props) {
