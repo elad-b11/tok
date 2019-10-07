@@ -7,8 +7,10 @@ import FallingLeaves from "../FallingLeaves/FallingLeaves.jsx";
 import Layers from "../LayerCarousel/Layers.jsx";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import layerActions from "../../actions/layersActions.js";
-import { Grid } from "semantic-ui-react";
 import "./Home.css";
+import { Grid, Button } from "@material-ui/core";
+import { StylesProvider } from "@material-ui/styles";
+import { Link } from "react-router-dom";
 
 class Home extends Component {
   constructor(props) {
@@ -21,19 +23,22 @@ class Home extends Component {
 
   render() {
     return (
-      <Grid centered stackable textAlign="center">
-        {/* <FallingLeaves/> */}
-        <Grid.Row>
-          <Grid.Column>
+      <StylesProvider injectFirst>
+        <Grid container direction="column" className="home-grid" spacing={2}>
+          {/* <FallingLeaves/> */}
+          <Grid item xs={12}>
             <Layers />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
+          </Grid>
+          <Grid item xs={12}>
             <SearchBar placeholder="שם שכבה" />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+          </Grid>
+          <Grid item>
+            <Button>
+              <Link to="/createLayer">create layer</Link>
+            </Button>
+          </Grid>
+        </Grid>
+      </StylesProvider>
     );
   }
 }

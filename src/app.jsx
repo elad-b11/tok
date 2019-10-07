@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import GananotRouter from './Router.js';
 
 import './index.scss';
+import { Container } from '@material-ui/core';
 
 const store = configureStore(initialState);
 

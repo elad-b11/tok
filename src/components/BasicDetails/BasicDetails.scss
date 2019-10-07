@@ -1,0 +1,16 @@
+// Variables
+$avatar-size: 150px;
+
+.paper {
+  height: 100%;
+}
+
+.grid {
+  direction: rtl;
+  background-color: bisque;
+}
+
+.avatar {
+  width: $avatar-size;
+  height: $avatar-size;
+}

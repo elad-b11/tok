@@ -71,6 +71,7 @@ class SearchBar extends Component {
       <Search
         className="search-bar"
         input={{ fluid: true }}
+        placeholder={"חפש/י שכבה"}
         fluid
         autoFocus
         value={layerName}
