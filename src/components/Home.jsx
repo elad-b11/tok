@@ -21,19 +21,22 @@ class Home extends Component {
 
   render() {
     return (
-      <Grid centered stackable textAlign="center">
-        {/* <FallingLeaves/> */}
-        <Grid.Row>
-          <Grid.Column>
-            <Layers />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
-            <SearchBar placeholder="שם שכבה" />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <div className="home-page">
+        <Grid centered stackable textAlign="center">
+          {/* <FallingLeaves/> */}
+          <Grid.Row>
+            <Grid.Column>
+              <Layers />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <SearchBar placeholder="שם שכבה" />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        <CreateMenu />
+      </div>
     );
   }
 }
