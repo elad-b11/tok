@@ -2,8 +2,20 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SpeedDial from "@material-ui/lab/SpeedDial";
+import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
 import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
-import SaveIcon from "@material-ui/icons/Save";
+import CreateIcon from "@material-ui/icons/Create";
+import PersonIcon from "@material-ui/icons/Person";
+import "./CreateMenu.scss";
+
+const actions = [
+  { icon: <CreateIcon />, name: "createLayer", tooltip: "צור שכבה" },
+  {
+    icon: <PersonIcon />,
+    name: "createPersonalLayer",
+    tooltip: "צור שכבה אישית"
+  }
+];
 
 class CreateMenu extends Component {
   constructor(props) {
@@ -12,41 +24,41 @@ class CreateMenu extends Component {
     this.state = {
       isOpen: false
     };
-    this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
-  handleButtonClick() {
-    this.setState({ isOpen: !this.state.isOpen });
+  handleOpen() {
+    this.setState({ isOpen: true });
+  }
+  handleClose() {
+    this.setState({ isOpen: false });
   }
 
   render() {
     return (
       <SpeedDial
-        className="MenuButton"
-        id="CreateMenu"
+        className="menu-button"
+        id="create-menu"
         ariaLabel="CreateMenu"
         open={this.state.isOpen}
         icon={<SpeedDialIcon />}
-      ></SpeedDial>
+        onOpen={this.handleOpen}
+        onClose={this.handleClose}
+      >
+        {actions.map(action => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.tooltip}
+            tooltipPlacement="left"
+            TooltipClasses={{ tooltip: "MuiTooltip-tooltip" }}
+            onClick={this.handleClose}
+          />
+        ))}
+      </SpeedDial>
     );
   }
 }
 
-/*const mapStateToProps = state => {
-  return {
-    layers: state.layers.list
-  };
-};
-
-const mapDipatchToProps = dispatch => {
-  return {
-    layerActions: bindActionCreators(layerActions, dispatch)
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDipatchToProps
-)(Layers);
-*/
 export default CreateMenu;
