@@ -8,6 +8,7 @@ import FallingLeaves from "./FallingLeaves/FallingLeaves.jsx";
 import Layers from "./LayerCarousel/Layers.jsx";
 import SearchBar from "./SearchBar/SearchBar.jsx";
 import layerActions from "../actions/layersActions.js";
+import CreateMenu from "./CreateMenu/CreateMenu.jsx";
 import { Grid } from "semantic-ui-react";
 
 class Home extends Component {
