@@ -60,7 +60,7 @@
     "img-loader": "^3.0.0",
     "jsdom": "8.5.0",
     "mocha": "2.4.5",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "nodemon": "^1.18.4",
     "npm-run-all": "1.8.0",
     "open": "0.0.5",
